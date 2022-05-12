@@ -4,7 +4,7 @@
 
 // func dotProd(a,b []float64) (float64)
 TEXT ·DotProd(SB), NOSPLIT, $0
-	// a data ptr
+	// a Data ptr
 	MOVQ 	a_base+0(FP), R8
 	MOVQ 	a_len+8(FP), SI
 	MOVQ 	b_base+24(FP), R9

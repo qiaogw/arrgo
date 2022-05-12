@@ -1,6 +1,7 @@
-最近在提升可用性，如果您发现了bug，请一定告知。
+最近在提升可用性，如果您发现了 bug，请一定告知。
 
 ### type Arrf
+
     func Abs(b *Arrf) *Arrf
     func Acos(b *Arrf) *Arrf
     func Acosh(b *Arrf) *Arrf
@@ -8,7 +9,7 @@
     func Arange(vals ...float64) (a *Arrf)
     func ArgMax(a *Arrf, axis ...int) *Arrf
     func ArgMin(a *Arrf, axis ...int) *Arrf
-    func Array(data []float64, shape ...int) (a *Arrf)
+    func Array(Data []float64, Shape ...int) (a *Arrf)
     func Asin(b *Arrf) *Arrf
     func Asinh(b *Arrf) *Arrf
     func Atan(b *Arrf) *Arrf
@@ -18,12 +19,12 @@
     func Cos(b *Arrf) *Arrf
     func Cosh(b *Arrf) *Arrf
     func Div(a, b *Arrf) *Arrf
-    func Empty(shape ...int) (a *Arrf)
+    func Empty(Shape ...int) (a *Arrf)
     func EmptyLike(a *Arrf) *Arrf
     func Exp(b *Arrf) *Arrf
     func Eye(n int) *Arrf
     func Floor(b *Arrf) *Arrf
-    func Full(fullValue float64, shape ...int) *Arrf
+    func Full(fullValue float64, Shape ...int) *Arrf
     func Identity(n int) *Arrf
     func Log(b *Arrf) *Arrf
     func Log10(b *Arrf) *Arrf
@@ -37,7 +38,7 @@
     func Mod(a, b *Arrf) *Arrf
     func Modf(b *Arrf) (*Arrf, *Arrf)
     func Mul(a, b *Arrf) *Arrf
-    func Ones(shape ...int) *Arrf
+    func Ones(Shape ...int) *Arrf
     func OnesLike(a *Arrf) *Arrf
     func Pow(a, b *Arrf) *Arrf
     func Round(b *Arrf, places int) *Arrf
@@ -54,7 +55,7 @@
     func Tanh(b *Arrf) *Arrf
     func Var(a *Arrf, axis ...int) *Arrf
     func Where(cond *Arrb, tv, fv interface{}) *Arrf
-    func Zeros(shape ...int) *Arrf
+    func Zeros(Shape ...int) *Arrf
     func ZerosLike(a *Arrf) *Arrf
     func (a *Arrf) Add(b *Arrf) *Arrf
     func (a *Arrf) AddC(b float64) *Arrf
@@ -82,7 +83,7 @@
     func (a *Arrf) MulC(b float64) *Arrf
     func (a *Arrf) Ndims() int
     func (a *Arrf) NotEqual(b *Arrf) *Arrb
-    func (a *Arrf) Reshape(shape ...int) *Arrf
+    func (a *Arrf) ReShape(Shape ...int) *Arrf
     func (a *Arrf) Set(val float64, index ...int) *Arrf
     func (a *Arrf) Sort(axis ...int) *Arrf
     func (a *Arrf) Std(axis ...int) *Arrf
@@ -95,10 +96,11 @@
     func (a *Arrf) Var(axis ...int) *Arrf
 
 ### type Arrb
-    func ArrayB(data []bool, shape ...int) (a *Arrb)
-    func EmptyB(shape ...int) (a *Arrb)
+
+    func ArrayB(Data []bool, Shape ...int) (a *Arrb)
+    func EmptyB(Shape ...int) (a *Arrb)
     func Equal(a, b *Arrf) *Arrb
-    func FullB(value bool, shape ...int) *Arrb
+    func FullB(value bool, Shape ...int) *Arrb
     func Greater(a, b *Arrf) *Arrb
     func GreaterEqual(a, b *Arrf) *Arrb
     func IsFinit(b *Arrf) *Arrb
@@ -119,12 +121,13 @@
     func (a *Arrb) Sum() int
 
 ### Variables
+
     func ContainsFloat64(s []float64, e float64) bool
-    func Hargmax(ln int, data []float64)
-    func Hargmin(ln int, data []float64)
-    func Hmax(ln int, data []float64)
-    func Hmin(ln int, data []float64)
-    func Hsort(ln int, data []float64)
+    func Hargmax(ln int, Data []float64)
+    func Hargmin(ln int, Data []float64)
+    func Hmax(ln int, Data []float64)
+    func Hmin(ln int, Data []float64)
+    func Hsort(ln int, Data []float64)
     func ProductIntSlice(slice []int) int
     func ReverseIntSlice(slice []int) []int
     func Roundf(val float64, places int) float64

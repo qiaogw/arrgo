@@ -51,15 +51,15 @@ func Roundf(val float64, places int) float64 {
 	return t
 }
 
-func Hmin(ln int, data []float64) {
-	for i := 0; i*ln < len(data); i++ {
-		minValue := data[i*ln]
+func Hmin(ln int, Data []float64) {
+	for i := 0; i*ln < len(Data); i++ {
+		minValue := Data[i*ln]
 		for j := i*ln + 1; j < i*ln+ln; j++ {
-			if minValue > data[j] {
-				minValue = data[j]
+			if minValue > Data[j] {
+				minValue = Data[j]
 			}
 		}
-		data[i] = minValue
+		Data[i] = minValue
 	}
 }
 
@@ -71,15 +71,15 @@ func Vmin(a, b []float64) {
 	}
 }
 
-func Hmax(ln int, data []float64) {
-	for i := 0; i*ln < len(data); i++ {
-		maxValue := data[i*ln]
+func Hmax(ln int, Data []float64) {
+	for i := 0; i*ln < len(Data); i++ {
+		maxValue := Data[i*ln]
 		for j := i*ln + 1; j < i*ln+ln; j++ {
-			if maxValue < data[j] {
-				maxValue = data[j]
+			if maxValue < Data[j] {
+				maxValue = Data[j]
 			}
 		}
-		data[i] = maxValue
+		Data[i] = maxValue
 	}
 }
 
@@ -92,17 +92,17 @@ func Vmax(a, b []float64) {
 }
 
 //在data中计算每ln个数据中，最大值的位置，并将结果依次放到data中。
-func Hargmax(ln int, data []float64) {
-	for i := 0; i*ln < len(data); i += 1 {
-		maxValue := data[i*ln]
+func Hargmax(ln int, Data []float64) {
+	for i := 0; i*ln < len(Data); i += 1 {
+		maxValue := Data[i*ln]
 		maxIndex := 0.0
 		for j := i*ln + 1; j < i*ln+ln; j++ {
-			if maxValue < data[j] {
-				maxValue = data[j]
+			if maxValue < Data[j] {
+				maxValue = Data[j]
 				maxIndex = float64(j % ln)
 			}
 		}
-		data[i] = maxIndex
+		Data[i] = maxIndex
 	}
 }
 
@@ -120,17 +120,17 @@ func Vargmax(ln int, a []float64) {
 	}
 }
 
-func Hargmin(ln int, data []float64) {
-	for i := 0; i*ln < len(data); i++ {
-		minValue := data[i*ln]
+func Hargmin(ln int, Data []float64) {
+	for i := 0; i*ln < len(Data); i++ {
+		minValue := Data[i*ln]
 		minIndex := 0.0
 		for j := i*ln + 1; j < i*ln+ln; j++ {
-			if minValue > data[j] {
-				minValue = data[j]
+			if minValue > Data[j] {
+				minValue = Data[j]
 				minIndex = float64(j % ln)
 			}
 		}
-		data[i] = minIndex
+		Data[i] = minIndex
 	}
 }
 
@@ -148,9 +148,9 @@ func Vargmin(ln int, a []float64) {
 	}
 }
 
-func Hsort(ln int, data []float64) {
-	for i := 0; i*ln < len(data); i++ {
-		sort.Float64s(data[i*ln : i*ln+ln])
+func Hsort(ln int, Data []float64) {
+	for i := 0; i*ln < len(Data); i++ {
+		sort.Float64s(Data[i*ln : i*ln+ln])
 	}
 }
 

@@ -13,26 +13,26 @@ func TestArrf_AddC(t *testing.T) {
 }
 
 //测试nil
-func TestArrf_AddC_SHAPEERROR(t *testing.T) {
+func TestArrf_AddC_ShapeERROR(t *testing.T) {
 	var arr *Arrf = nil
 
 	defer func() {
 		var rec = recover()
 		if rec != SHAPE_ERROR {
-			t.Error("Expected SHAPE ERROR, got ", rec)
+			t.Error("Expected Shape ERROR, got ", rec)
 		}
 	}()
 	arr.AddC(10)
 }
 
 //测试空array
-func TestArrf_AddC_SHAPEERROR2(t *testing.T) {
+func TestArrf_AddC_ShapeERROR2(t *testing.T) {
 	var arr *Arrf = Array([]float64{})
 
 	defer func() {
 		var rec = recover()
 		if rec != SHAPE_ERROR {
-			t.Error("Expected SHAPE ERROR, got ", rec)
+			t.Error("Expected Shape ERROR, got ", rec)
 		}
 	}()
 	arr.AddC(10)
@@ -53,7 +53,7 @@ func TestArrf_Add(t *testing.T) {
 //    defer func(){
 //       var rec = recover()
 //        if rec != SHAPE_ERROR {
-//            t.Error("Expected SHAPE ERROR, got ", rec)
+//            t.Error("Expected Shape ERROR, got ", rec)
 //        }
 //    }()
 //    a.Add(nil)
@@ -65,7 +65,7 @@ func TestArrf_Add_NDimException(t *testing.T) {
 	defer func() {
 		var rec = recover()
 		if rec != SHAPE_ERROR {
-			t.Error("Expected SHAPE ERROR, got ", rec)
+			t.Error("Expected Shape ERROR, got ", rec)
 		}
 	}()
 	a.Add(b)

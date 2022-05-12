@@ -59,10 +59,10 @@ noavx:
 
 // func AddC(c float64, d []float64)
 TEXT ·AddC(SB), NOSPLIT, $0
-	// data ptr
+	// Data ptr
 	MOVQ d+8(FP), R10
 
-	// n = data len
+	// n = Data len
 	MOVQ d_len+16(FP), SI
 
 	// zero len return
@@ -132,10 +132,10 @@ ACEND:
 
 // func subtrC(c float64, d []float64)
 TEXT ·SubtrC(SB), NOSPLIT, $0
-	// data ptr
+	// Data ptr
 	MOVQ d+8(FP), R10
 
-	// n = data len
+	// n = Data len
 	MOVQ d_len+16(FP), SI
 
 	// zero len return
@@ -219,10 +219,10 @@ MCEND:
 
 // func divC(c float64, d []float64)
 TEXT ·DivC(SB), NOSPLIT, $0
-	// data ptr
+	// Data ptr
 	MOVQ d+8(FP), R10
 
-	// n = data len
+	// n = Data len
 	MOVQ d_len+16(FP), SI
 
 	// zero len return
@@ -265,13 +265,13 @@ DCEND:
 
 // func add(a,b []float64)
 TEXT ·Add(SB), NOSPLIT, $0
-	// a data ptr
+	// a Data ptr
 	MOVQ a_base+0(FP), R8
 
 	// a len
 	MOVQ a_len+8(FP), SI
 
-	// b data ptr
+	// b Data ptr
 	MOVQ b_base+24(FP), R9
 	MOVQ R9, R10
 
@@ -337,13 +337,13 @@ AEND:
 // func vadd(a,b[]float64)
 // req:  len(a) == len(b)
 TEXT ·Vadd(SB), NOSPLIT, $0
-	// a data ptr
+	// a Data ptr
 	MOVQ a_base+0(FP), R8
 
 	// a len
 	MOVQ a_len+8(FP), SI
 
-	// b data ptr
+	// b Data ptr
 	MOVQ b_base+24(FP), R9
 
 	// zero len return
@@ -430,7 +430,7 @@ vadd_exit:
 // func hadd(st uint64, a []float64)
 // req:  len(a) == len(b)
 TEXT ·Hadd(SB), NOSPLIT, $0
-	// a data ptr
+	// a Data ptr
 	MOVQ a_base+8(FP), R8
 	MOVQ R8, R9
 
@@ -524,13 +524,13 @@ hadd_exit:
 	
 // func subtr(a,b []float64)
 TEXT ·Subtr(SB), NOSPLIT, $0
-	// a data ptr
+	// a Data ptr
 	MOVQ a_base+0(FP), R8
 
 	// a len
 	MOVQ a_len+8(FP), SI
 
-	// b data ptr
+	// b Data ptr
 	MOVQ b_base+24(FP), R9
 	MOVQ R9, R10
 
@@ -596,13 +596,13 @@ SEND:
 
 // func mult(a,b []float64)
 TEXT ·Mult(SB), NOSPLIT, $0
-	// a data ptr
+	// a Data ptr
 	MOVQ a_base+0(FP), R8
 
 	// a len
 	MOVQ a_len+8(FP), SI
 
-	// b data ptr
+	// b Data ptr
 	MOVQ b_base+24(FP), R9
 	MOVQ R9, R10
 
@@ -668,13 +668,13 @@ MEND:
 
 // func div(a,b []float64)
 TEXT ·Div(SB), NOSPLIT, $0
-	// a data ptr
+	// a Data ptr
 	MOVQ a_base+0(FP), R8
 
 	// a len
 	MOVQ a_len+8(FP), SI
 
-	// b data ptr
+	// b Data ptr
 	MOVQ b_base+24(FP), R9
 	MOVQ R9, R10
 
@@ -743,13 +743,13 @@ TEXT ·Fma12(SB), NOSPLIT, $0
 	MOVSD  a+0(FP), X2
 	SHUFPD $0, X2, X2
 
-	// x data ptr
+	// x Data ptr
 	MOVQ x_base+8(FP), R8
 
 	// x len
 	MOVQ x_len+16(FP), SI
 
-	// b data ptr
+	// b Data ptr
 	MOVQ b_base+32(FP), R9
 	MOVQ R9, R10
 
@@ -854,13 +854,13 @@ TEXT ·Fma21(SB), NOSPLIT, $0
 	MOVSD  a+0(FP), X2
 	SHUFPD $0, X2, X2
 
-	// x data ptr
+	// x Data ptr
 	MOVQ x_base+8(FP), R8
 
 	// x len
 	MOVQ x_len+16(FP), SI
 
-	// b data ptr
+	// b Data ptr
 	MOVQ b_base+32(FP), R9
 	MOVQ R9, R10
 

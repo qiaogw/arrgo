@@ -1,8 +1,9 @@
 package arrgo
 
 import (
-	"github.com/qiaogw/arrgo/internal"
 	"math"
+
+	asm "github.com/qiaogw/arrgo/internal"
 	//"github.com/ledao/arrgo/internal"
 )
 
@@ -12,7 +13,7 @@ func (a *Arrf) AddC(b float64) *Arrf {
 		panic(SHAPE_ERROR)
 	}
 	ta := a.Copy()
-	asm.AddC(b, ta.data)
+	asm.AddC(b, ta.Data)
 	return ta
 }
 
@@ -22,7 +23,7 @@ func (a *Arrf) AddC(b float64) *Arrf {
 func (a *Arrf) Add(b *Arrf) *Arrf {
 	if a.SameShapeTo(b) {
 		var ta = a.Copy()
-		asm.Add(ta.data, b.data)
+		asm.Add(ta.Data, b.Data)
 		return ta
 	}
 	var ta, tb, err = Boardcast(a, b)
@@ -35,7 +36,7 @@ func (a *Arrf) Add(b *Arrf) *Arrf {
 //多维数组和标量相减，结果为新的多维数组，不修改原数组。
 func (a *Arrf) SubC(b float64) *Arrf {
 	ta := a.Copy()
-	asm.SubtrC(b, ta.data)
+	asm.SubtrC(b, ta.Data)
 	return ta
 }
 
@@ -45,7 +46,7 @@ func (a *Arrf) SubC(b float64) *Arrf {
 func (a *Arrf) Sub(b *Arrf) *Arrf {
 	if a.SameShapeTo(b) {
 		var ta = a.Copy()
-		asm.Subtr(ta.data, b.data)
+		asm.Subtr(ta.Data, b.Data)
 		return ta
 	}
 	var ta, tb, err = Boardcast(a, b)
@@ -57,14 +58,14 @@ func (a *Arrf) Sub(b *Arrf) *Arrf {
 
 func (a *Arrf) MulC(b float64) *Arrf {
 	ta := a.Copy()
-	asm.MultC(b, ta.data)
+	asm.MultC(b, ta.Data)
 	return ta
 }
 
 func (a *Arrf) Mul(b *Arrf) *Arrf {
 	if a.SameShapeTo(b) {
 		var ta = a.Copy()
-		asm.Mult(ta.data, b.data)
+		asm.Mult(ta.Data, b.Data)
 		return ta
 	}
 	var ta, tb, err = Boardcast(a, b)
@@ -76,14 +77,14 @@ func (a *Arrf) Mul(b *Arrf) *Arrf {
 
 func (a *Arrf) DivC(b float64) *Arrf {
 	ta := a.Copy()
-	asm.DivC(b, ta.data)
+	asm.DivC(b, ta.Data)
 	return ta
 }
 
 func (a *Arrf) Div(b *Arrf) *Arrf {
 	if a.SameShapeTo(b) {
 		var ta = a.Copy()
-		asm.Div(ta.data, b.data)
+		asm.Div(ta.Data, b.Data)
 		return ta
 	}
 	var ta, tb, err = Boardcast(a, b)
@@ -96,18 +97,18 @@ func (a *Arrf) Div(b *Arrf) *Arrf {
 func (a *Arrf) DotProd(b *Arrf) float64 {
 	switch {
 	case a.Ndims() == 1 && b.Ndims() == 1 && a.Length() == b.Length():
-		return asm.DotProd(a.data, b.data)
+		return asm.DotProd(a.Data, b.Data)
 	}
 	panic(SHAPE_ERROR)
 }
 
 func (a *Arrf) MatProd(b *Arrf) *Arrf {
 	switch {
-	case a.Ndims() == 2 && b.Ndims() == 2 && a.shape[1] == b.shape[0]:
-		ret := Zeros(a.shape[0], b.shape[1])
-		for i := 0; i < a.shape[0]; i++ {
-			for j := 0; j < a.shape[1]; j++ {
-				ret.Set(a.Index(Range{i, i + 1}).DotProd(b.Index(Range{0, b.shape[0]}, Range{j, j + 1})), i, j)
+	case a.Ndims() == 2 && b.Ndims() == 2 && a.Shape[1] == b.Shape[0]:
+		ret := Zeros(a.Shape[0], b.Shape[1])
+		for i := 0; i < a.Shape[0]; i++ {
+			for j := 0; j < a.Shape[1]; j++ {
+				ret.Set(a.Index(Range{i, i + 1}).DotProd(b.Index(Range{0, b.Shape[0]}, Range{j, j + 1})), i, j)
 			}
 		}
 		return ret
@@ -117,64 +118,64 @@ func (a *Arrf) MatProd(b *Arrf) *Arrf {
 
 func Abs(b *Arrf) *Arrf {
 	tb := b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Abs(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Abs(v)
 	}
 	return tb
 }
 
 func Sqrt(b *Arrf) *Arrf {
 	tb := b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Sqrt(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Sqrt(v)
 	}
 	return tb
 }
 
 func Square(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Pow(v, 2)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Pow(v, 2)
 	}
 	return tb
 }
 
 func Exp(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Exp(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Exp(v)
 	}
 	return tb
 }
 
 func Log(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Log(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Log(v)
 	}
 	return tb
 }
 
 func Log10(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Log10(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Log10(v)
 	}
 	return tb
 }
 
 func Log2(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Log2(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Log2(v)
 	}
 	return tb
 }
 
 func Log1p(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Log1p(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Log1p(v)
 	}
 	return tb
 }
@@ -182,37 +183,37 @@ func Log1p(b *Arrf) *Arrf {
 func Sign(b *Arrf) *Arrf {
 	var tb = b.Copy()
 	var sign float64 = 0
-	for i, v := range tb.data {
+	for i, v := range tb.Data {
 		if v > 0 {
 			sign = 1
 		} else if v < 0 {
 			sign = -1
 		}
-		tb.data[i] = sign
+		tb.Data[i] = sign
 	}
 	return tb
 }
 
 func Ceil(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Ceil(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Ceil(v)
 	}
 	return tb
 }
 
 func Floor(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Floor(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Floor(v)
 	}
 	return tb
 }
 
 func Round(b *Arrf, places int) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = Roundf(v, places)
+	for i, v := range tb.Data {
+		tb.Data[i] = Roundf(v, places)
 	}
 	return tb
 }
@@ -220,130 +221,130 @@ func Round(b *Arrf, places int) *Arrf {
 func Modf(b *Arrf) (*Arrf, *Arrf) {
 	var tb = b.Copy()
 	var tbFrac = b.Copy()
-	for i, v := range tb.data {
+	for i, v := range tb.Data {
 		r, f := math.Modf(v)
-		tb.data[i] = r
-		tbFrac.data[i] = f
+		tb.Data[i] = r
+		tbFrac.Data[i] = f
 	}
 	return tb, tbFrac
 }
 
 func IsNaN(b *Arrf) *Arrb {
-	var tb = EmptyB(b.shape...)
-	for i, v := range b.data {
-		tb.data[i] = math.IsNaN(v)
+	var tb = EmptyB(b.Shape...)
+	for i, v := range b.Data {
+		tb.Data[i] = math.IsNaN(v)
 	}
 	return tb
 }
 
 func IsInf(b *Arrf) *Arrb {
-	var tb = EmptyB(b.shape...)
-	for i, v := range b.data {
-		tb.data[i] = math.IsInf(v, 0)
+	var tb = EmptyB(b.Shape...)
+	for i, v := range b.Data {
+		tb.Data[i] = math.IsInf(v, 0)
 	}
 	return tb
 }
 
 func IsFinit(b *Arrf) *Arrb {
-	var tb = EmptyB(b.shape...)
-	for i, v := range b.data {
-		tb.data[i] = !math.IsInf(v, 0)
+	var tb = EmptyB(b.Shape...)
+	for i, v := range b.Data {
+		tb.Data[i] = !math.IsInf(v, 0)
 	}
 	return tb
 }
 
 func Cos(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Cos(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Cos(v)
 	}
 	return tb
 }
 
 func Cosh(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Cosh(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Cosh(v)
 	}
 	return tb
 }
 
 func Acos(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Acos(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Acos(v)
 	}
 	return tb
 }
 
 func Acosh(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Acosh(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Acosh(v)
 	}
 	return tb
 }
 
 func Sin(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Sin(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Sin(v)
 	}
 	return tb
 }
 
 func Sinh(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Sinh(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Sinh(v)
 	}
 	return tb
 }
 
 func Asin(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Asin(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Asin(v)
 	}
 	return tb
 }
 
 func Asinh(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Asinh(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Asinh(v)
 	}
 	return tb
 }
 
 func Tan(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Tan(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Tan(v)
 	}
 	return tb
 }
 
 func Tanh(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Tanh(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Tanh(v)
 	}
 	return tb
 }
 
 func Atan(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Atan(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Atan(v)
 	}
 	return tb
 }
 
 func Atanh(b *Arrf) *Arrf {
 	var tb = b.Copy()
-	for i, v := range tb.data {
-		tb.data[i] = math.Atanh(v)
+	for i, v := range tb.Data {
+		tb.Data[i] = math.Atanh(v)
 	}
 	return tb
 }
@@ -366,38 +367,38 @@ func Div(a, b *Arrf) *Arrf {
 
 func Pow(a, b *Arrf) *Arrf {
 	var t = ZerosLike(a)
-	for i, v := range a.data {
-		t.data[i] = math.Pow(v, b.data[i])
+	for i, v := range a.Data {
+		t.Data[i] = math.Pow(v, b.Data[i])
 	}
 	return t
 }
 
 func Maximum(a, b *Arrf) *Arrf {
 	var t = a.Copy()
-	for i, v := range t.data {
-		if v < b.data[i] {
-			v = b.data[i]
+	for i, v := range t.Data {
+		if v < b.Data[i] {
+			v = b.Data[i]
 		}
-		t.data[i] = v
+		t.Data[i] = v
 	}
 	return t
 }
 
 func Minimum(a, b *Arrf) *Arrf {
 	var t = a.Copy()
-	for i, v := range t.data {
-		if v > b.data[i] {
-			v = b.data[i]
+	for i, v := range t.Data {
+		if v > b.Data[i] {
+			v = b.Data[i]
 		}
-		t.data[i] = v
+		t.Data[i] = v
 	}
 	return t
 }
 
 func Mod(a, b *Arrf) *Arrf {
 	var t = a.Copy()
-	for i, v := range t.data {
-		t.data[i] = math.Mod(v, b.data[i])
+	for i, v := range t.Data {
+		t.Data[i] = math.Mod(v, b.Data[i])
 	}
 	return t
 }
@@ -414,13 +415,13 @@ func Boardcast(a, b *Arrf) (*Arrf, *Arrf, error) {
 	}
 	var bNewShape []int
 	if a.Ndims() == b.Ndims() {
-		bNewShape = b.shape
+		bNewShape = b.Shape
 	} else {
-		bNewShape = make([]int, len(a.shape))
+		bNewShape = make([]int, len(a.Shape))
 		for i := range bNewShape {
 			bNewShape[i] = 1
 		}
-		copy(bNewShape[len(a.shape)-len(b.shape):], b.shape)
+		copy(bNewShape[len(a.Shape)-len(b.Shape):], b.Shape)
 	}
 
 	var aChangeIndex = make([]int, 0)
@@ -428,14 +429,14 @@ func Boardcast(a, b *Arrf) (*Arrf, *Arrf, error) {
 	var bChangeIndex = make([]int, 0)
 	var bChangeNum = make([]int, 0)
 	for i := range bNewShape {
-		if a.shape[i] == bNewShape[i] {
+		if a.Shape[i] == bNewShape[i] {
 			continue
-		} else if a.shape[i] == 1 {
+		} else if a.Shape[i] == 1 {
 			aChangeIndex = append(aChangeIndex, i)
 			aChangeNum = append(aChangeNum, bNewShape[i])
 		} else if bNewShape[i] == 1 {
 			bChangeIndex = append(bChangeIndex, i)
-			bChangeNum = append(bChangeNum, a.shape[i])
+			bChangeNum = append(bChangeNum, a.Shape[i])
 		} else {
 			return nil, nil, SHAPE_ERROR
 		}
@@ -449,16 +450,16 @@ func Boardcast(a, b *Arrf) (*Arrf, *Arrf, error) {
 		var expandTimes = ProductIntSlice(aChangeNum)
 		var expandData = make([]float64, baseNum*expandTimes)
 		for i := 0; i < expandTimes; i++ {
-			copy(expandData[i*baseNum:(i+1)*baseNum], a.data)
+			copy(expandData[i*baseNum:(i+1)*baseNum], a.Data)
 		}
-		var newPos = make([]int, len(aChangeIndex), len(a.shape))
-		var expandShape = make([]int, len(aChangeNum), len(a.shape))
+		var newPos = make([]int, len(aChangeIndex), len(a.Shape))
+		var expandShape = make([]int, len(aChangeNum), len(a.Shape))
 		copy(newPos, aChangeIndex)
 		copy(expandShape, aChangeNum)
-		for i := range a.shape {
+		for i := range a.Shape {
 			if !ContainsInt(aChangeIndex, i) {
 				newPos = append(newPos, i)
-				expandShape = append(expandShape, a.shape[i])
+				expandShape = append(expandShape, a.Shape[i])
 			}
 		}
 		aNew = Array(expandData, expandShape...).Transpose(newPos...)
@@ -471,7 +472,7 @@ func Boardcast(a, b *Arrf) (*Arrf, *Arrf, error) {
 		var expandTimes = ProductIntSlice(bChangeNum)
 		var expandData = make([]float64, baseNum*expandTimes)
 		for i := 0; i < expandTimes; i++ {
-			copy(expandData[i*baseNum:(i+1)*baseNum], b.data)
+			copy(expandData[i*baseNum:(i+1)*baseNum], b.Data)
 		}
 		var newPos = make([]int, len(bChangeIndex), len(bNewShape))
 		var expandShape = make([]int, len(bChangeNum), len(bNewShape))

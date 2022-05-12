@@ -7,27 +7,27 @@ import (
 
 func TestArrayCond1(t *testing.T) {
 	arr := Array(nil)
-	if SameFloat64Slice(arr.data, []float64{}) != true {
-		t.Error("array data should be []float64{}, got ", arr.data)
+	if SameFloat64Slice(arr.Data, []float64{}) != true {
+		t.Error("array Data should be []float64{}, got ", arr.Data)
 	}
-	if SameIntSlice(arr.shape, []int{0}) != true {
-		t.Error("array shape should be []int{0}, got ", arr.shape)
+	if SameIntSlice(arr.Shape, []int{0}) != true {
+		t.Error("array Shape should be []int{0}, got ", arr.Shape)
 	}
-	if SameIntSlice(arr.strides, []int{0, 1}) != true {
-		t.Error("array strides should be []int{0, 1}, got ", arr.shape)
+	if SameIntSlice(arr.Strides, []int{0, 1}) != true {
+		t.Error("array Strides should be []int{0, 1}, got ", arr.Shape)
 	}
 }
 
 func TestArrayCond2(t *testing.T) {
 	arr := Array([]float64{1, 2, 3})
-	if SameFloat64Slice(arr.data, []float64{1, 2, 3}) != true {
-		t.Error("array data should be []float64{1,2,3}, got ", arr.data)
+	if SameFloat64Slice(arr.Data, []float64{1, 2, 3}) != true {
+		t.Error("array Data should be []float64{1,2,3}, got ", arr.Data)
 	}
-	if SameIntSlice(arr.shape, []int{3}) != true {
-		t.Error("array shape should be []int{3}, got ", arr.shape)
+	if SameIntSlice(arr.Shape, []int{3}) != true {
+		t.Error("array Shape should be []int{3}, got ", arr.Shape)
 	}
-	if SameIntSlice(arr.strides, []int{3, 1}) != true {
-		t.Error("array strides should be []int{3, 1}, got ", arr.shape)
+	if SameIntSlice(arr.Strides, []int{3, 1}) != true {
+		t.Error("array Strides should be []int{3, 1}, got ", arr.Shape)
 	}
 }
 
@@ -35,7 +35,7 @@ func TestArrayCond3ExceptionTwoNegtiveDims(t *testing.T) {
 	defer func() {
 		r := recover()
 		if r != SHAPE_ERROR {
-			t.Error("Exepcted shape error, got ", r)
+			t.Error("Exepcted Shape error, got ", r)
 		}
 	}()
 
@@ -46,7 +46,7 @@ func TestArrayCond3ExceptionLengError(t *testing.T) {
 	defer func() {
 		r := recover()
 		if r != SHAPE_ERROR {
-			t.Error("Exepcted shape error, got ", r)
+			t.Error("Exepcted Shape error, got ", r)
 		}
 	}()
 
@@ -57,7 +57,7 @@ func TestArrayCond3ExceptionDivError(t *testing.T) {
 	defer func() {
 		r := recover()
 		if r != SHAPE_ERROR {
-			t.Error("Exepcted shape error, got ", r)
+			t.Error("Exepcted Shape error, got ", r)
 		}
 	}()
 
@@ -66,44 +66,44 @@ func TestArrayCond3ExceptionDivError(t *testing.T) {
 
 func TestArrayCond3(t *testing.T) {
 	arr := Array([]float64{1, 2, 3, 4}, 2, 2)
-	if !SameIntSlice(arr.shape, []int{2, 2}) {
-		t.Error("Expected [2, 2], got ", arr.shape)
+	if !SameIntSlice(arr.Shape, []int{2, 2}) {
+		t.Error("Expected [2, 2], got ", arr.Shape)
 	}
-	if !SameIntSlice(arr.strides, []int{4, 2, 1}) {
-		t.Error("Expected [4,2,1], got", arr.strides)
+	if !SameIntSlice(arr.Strides, []int{4, 2, 1}) {
+		t.Error("Expected [4,2,1], got", arr.Strides)
 	}
-	if !SameFloat64Slice(arr.data, []float64{1, 2, 3, 4}) {
-		t.Error("Expected [1,2,3,4], got ", arr.data)
+	if !SameFloat64Slice(arr.Data, []float64{1, 2, 3, 4}) {
+		t.Error("Expected [1,2,3,4], got ", arr.Data)
 	}
 
 	arr = Array([]float64{1, 2, 3, 4}, 2, -1)
-	if !SameIntSlice(arr.shape, []int{2, 2}) {
-		t.Error("Expected [2, 2], got ", arr.shape)
+	if !SameIntSlice(arr.Shape, []int{2, 2}) {
+		t.Error("Expected [2, 2], got ", arr.Shape)
 	}
-	if !SameIntSlice(arr.strides, []int{4, 2, 1}) {
-		t.Error("Expected [4,2,1], got", arr.strides)
+	if !SameIntSlice(arr.Strides, []int{4, 2, 1}) {
+		t.Error("Expected [4,2,1], got", arr.Strides)
 	}
-	if !SameFloat64Slice(arr.data, []float64{1, 2, 3, 4}) {
-		t.Error("Expected [1,2,3,4], got ", arr.data)
+	if !SameFloat64Slice(arr.Data, []float64{1, 2, 3, 4}) {
+		t.Error("Expected [1,2,3,4], got ", arr.Data)
 	}
 }
 
 func TestArrayCond4(t *testing.T) {
 	arr := Array(nil, 2, 3)
-	if SameFloat64Slice(arr.data, []float64{0, 0, 0, 0, 0, 0}) != true {
-		t.Error("array data should be []float64{0, 0, 0, 0, 0, 0}, got ", arr.data)
+	if SameFloat64Slice(arr.Data, []float64{0, 0, 0, 0, 0, 0}) != true {
+		t.Error("array Data should be []float64{0, 0, 0, 0, 0, 0}, got ", arr.Data)
 	}
-	if SameIntSlice(arr.shape, []int{2, 3}) != true {
-		t.Error("array shape should be []int{2, 3}, got ", arr.shape)
+	if SameIntSlice(arr.Shape, []int{2, 3}) != true {
+		t.Error("array Shape should be []int{2, 3}, got ", arr.Shape)
 	}
-	if SameIntSlice(arr.strides, []int{6, 3, 1}) != true {
-		t.Error("array strides should be []int{6, 3, 1}, got ", arr.shape)
+	if SameIntSlice(arr.Strides, []int{6, 3, 1}) != true {
+		t.Error("array Strides should be []int{6, 3, 1}, got ", arr.Shape)
 	}
 
 	defer func() {
 		err := recover()
 		if err != SHAPE_ERROR {
-			t.Error("should panic shape error, got ", err)
+			t.Error("should panic Shape error, got ", err)
 		}
 	}()
 
@@ -187,7 +187,7 @@ func TestArrf_IsEmpty(t *testing.T) {
 		t.Error("Expected empty arra")
 	}
 
-	empty.data = make([]float64, 0)
+	empty.Data = make([]float64, 0)
 
 	if empty.IsEmpty() != true {
 		t.Error("Expected empty arra")
@@ -197,16 +197,16 @@ func TestArrf_IsEmpty(t *testing.T) {
 func TestFill(t *testing.T) {
 	arr := Fill(1.0, 3)
 
-	if !SameIntSlice(arr.shape, []int{3}) {
-		t.Error("Expected [3], got ", arr.shape)
+	if !SameIntSlice(arr.Shape, []int{3}) {
+		t.Error("Expected [3], got ", arr.Shape)
 	}
 
-	if !SameIntSlice(arr.strides, []int{3, 1}) {
-		t.Error("Expected [3, 1], got ", arr.strides)
+	if !SameIntSlice(arr.Strides, []int{3, 1}) {
+		t.Error("Expected [3, 1], got ", arr.Strides)
 	}
 
-	if !SameFloat64Slice(arr.data, []float64{1.0, 1.0, 1.0}) {
-		t.Error("Expected [1.0, 1.0, 1.0], got ", arr.data)
+	if !SameFloat64Slice(arr.Data, []float64{1.0, 1.0, 1.0}) {
+		t.Error("Expected [1.0, 1.0, 1.0], got ", arr.Data)
 	}
 }
 
@@ -225,16 +225,16 @@ func TestFillException(t *testing.T) {
 func TestOnes(t *testing.T) {
 	arr := Ones(3)
 
-	if !SameIntSlice(arr.shape, []int{3}) {
-		t.Error("Expected [3], got ", arr.shape)
+	if !SameIntSlice(arr.Shape, []int{3}) {
+		t.Error("Expected [3], got ", arr.Shape)
 	}
 
-	if !SameIntSlice(arr.strides, []int{3, 1}) {
-		t.Error("Expected [3, 1], got ", arr.strides)
+	if !SameIntSlice(arr.Strides, []int{3, 1}) {
+		t.Error("Expected [3, 1], got ", arr.Strides)
 	}
 
-	if !SameFloat64Slice(arr.data, []float64{1, 1, 1}) {
-		t.Error("Expected [1, 1, 1], got ", arr.data)
+	if !SameFloat64Slice(arr.Data, []float64{1, 1, 1}) {
+		t.Error("Expected [1, 1, 1], got ", arr.Data)
 	}
 }
 
@@ -242,32 +242,32 @@ func TestOnesLike(t *testing.T) {
 	originalArr := Ones(3)
 	arr := OnesLike(originalArr)
 
-	if !SameIntSlice(arr.shape, []int{3}) {
-		t.Error("Expected [3], got ", arr.shape)
+	if !SameIntSlice(arr.Shape, []int{3}) {
+		t.Error("Expected [3], got ", arr.Shape)
 	}
 
-	if !SameIntSlice(arr.strides, []int{3, 1}) {
-		t.Error("Expected [3, 1], got ", arr.strides)
+	if !SameIntSlice(arr.Strides, []int{3, 1}) {
+		t.Error("Expected [3, 1], got ", arr.Strides)
 	}
 
-	if !SameFloat64Slice(arr.data, []float64{1, 1, 1}) {
-		t.Error("Expected [1, 1, 1], got ", arr.data)
+	if !SameFloat64Slice(arr.Data, []float64{1, 1, 1}) {
+		t.Error("Expected [1, 1, 1], got ", arr.Data)
 	}
 }
 
 func TestZeros(t *testing.T) {
 	arr := Zeros(3)
 
-	if !SameIntSlice(arr.shape, []int{3}) {
-		t.Error("Expected [3], got ", arr.shape)
+	if !SameIntSlice(arr.Shape, []int{3}) {
+		t.Error("Expected [3], got ", arr.Shape)
 	}
 
-	if !SameIntSlice(arr.strides, []int{3, 1}) {
-		t.Error("Expected [3, 1], got ", arr.strides)
+	if !SameIntSlice(arr.Strides, []int{3, 1}) {
+		t.Error("Expected [3, 1], got ", arr.Strides)
 	}
 
-	if !SameFloat64Slice(arr.data, []float64{0, 0, 0}) {
-		t.Error("Expected [0,0,0], got ", arr.data)
+	if !SameFloat64Slice(arr.Data, []float64{0, 0, 0}) {
+		t.Error("Expected [0,0,0], got ", arr.Data)
 	}
 }
 
@@ -275,16 +275,16 @@ func TestZerosLike(t *testing.T) {
 	orignalArr := Zeros(3)
 	arr := ZerosLike(orignalArr)
 
-	if !SameIntSlice(arr.shape, []int{3}) {
-		t.Error("Expected [3], got ", arr.shape)
+	if !SameIntSlice(arr.Shape, []int{3}) {
+		t.Error("Expected [3], got ", arr.Shape)
 	}
 
-	if !SameIntSlice(arr.strides, []int{3, 1}) {
-		t.Error("Expected [3, 1], got ", arr.strides)
+	if !SameIntSlice(arr.Strides, []int{3, 1}) {
+		t.Error("Expected [3, 1], got ", arr.Strides)
 	}
 
-	if !SameFloat64Slice(arr.data, []float64{0, 0, 0}) {
-		t.Error("Expected [0,0,0], got ", arr.data)
+	if !SameFloat64Slice(arr.Data, []float64{0, 0, 0}) {
+		t.Error("Expected [0,0,0], got ", arr.Data)
 	}
 }
 
@@ -432,8 +432,8 @@ func TestArrf_Values(t *testing.T) {
 	}
 	values[0] = 100
 
-	if arr.data[0] != 100 {
-		t.Error("Expected 100, got ", arr.data[0])
+	if arr.Data[0] != 100 {
+		t.Error("Expected 100, got ", arr.Data[0])
 	}
 }
 
@@ -485,19 +485,19 @@ func TestArrf_Ndims(t *testing.T) {
 		t.Error("Expected 1, got ", arr.Ndims())
 	}
 
-	arr.Reshape(2, 5)
+	arr.ReShape(2, 5)
 	if arr.Ndims() != 2 {
 		t.Error("Expected 2, got ", arr.Ndims())
 	}
 
-	arr.Reshape(2, 5, 1)
+	arr.ReShape(2, 5, 1)
 	if arr.Ndims() != 3 {
 		t.Error("Expected 3, got ", arr.Ndims())
 	}
 }
 
 func TestArrf_Transpose(t *testing.T) {
-	arr := Arange(4).Reshape(2, 2)
+	arr := Arange(4).ReShape(2, 2)
 
 	if !arr.Equal(Array([]float64{0, 1, 2, 3}, 2, 2)).AllTrues() {
 		t.Error("Expected [[0,1],[2,3]], got ", arr)
@@ -533,13 +533,13 @@ func TestArrf_String(t *testing.T) {
 	}
 
 	arr = Zeros(2)
-	arr.data = nil
+	arr.Data = nil
 	if arr.String() != "<nil>" {
 		t.Error("Expected <nil> got ", arr.String())
 	}
 
 	arr = Array(nil, 1)
-	arr.strides = make([]int, 2)
+	arr.Strides = make([]int, 2)
 	if arr.String() != "[]" {
 		t.Error("Expected [], got ", arr.String())
 	}
@@ -549,7 +549,7 @@ func TestArrf_String(t *testing.T) {
 		t.Error("Expected [0 1], got ", arr.String())
 	}
 
-	arr = Arange(2).Reshape(2, 1)
+	arr = Arange(2).ReShape(2, 1)
 	if strings.Replace(arr.String(), "\n", ":", -1) != "[[0] : [1]]" {
 		t.Error("Expected , got ", arr.String())
 	}

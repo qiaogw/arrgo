@@ -3,7 +3,7 @@ package arrgo
 import "testing"
 
 func TestSum(t *testing.T) {
-	var arr = Arange(100).Reshape(2, 5, 10)
+	var arr = Arange(100).ReShape(2, 5, 10)
 	if arr.Sum(0).NotEqual(Array(
 		[]float64{
 			50, 52, 54, 56, 58, 60, 62, 64, 66, 68,
@@ -70,10 +70,9 @@ func TestSum(t *testing.T) {
 	}
 }
 
-
 func TestArgMax(t *testing.T) {
-	arr := Array([]float64{17, 10, 22,  3,  2,  7, 15,  9, 23,  4, 14, 18,  5,  8,  0, 12,  1,
-			       19, 20, 11,  6, 16, 21, 13}, 2,3,4)
+	arr := Array([]float64{17, 10, 22, 3, 2, 7, 15, 9, 23, 4, 14, 18, 5, 8, 0, 12, 1,
+		19, 20, 11, 6, 16, 21, 13}, 2, 3, 4)
 
 	if arr.ArgMax(0).NotEqual(Array([]float64{0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0}, 3, 4)).AnyTrue() {
 		t.Error(`Expected
@@ -89,7 +88,6 @@ func TestArgMax(t *testing.T) {
 		[0, 1, 1, 0]], got `, arr.ArgMax(0))
 	}
 
-
 	if arr.ArgMax(1).NotEqual(Array([]float64{2, 0, 0, 2, 2, 1, 2, 2}, 2, 4)).AnyTrue() {
 		t.Error(`Expected
 		[[2, 0, 0, 2],
@@ -101,7 +99,6 @@ func TestArgMax(t *testing.T) {
 		[[2, 0, 0, 2],
        		[2, 1, 2, 2]], got `, arr.ArgMax(1))
 	}
-
 
 	if arr.ArgMax(2).NotEqual(Array([]float64{2, 2, 0, 3, 2, 2}, 2, 3)).AnyTrue() {
 		t.Error(`Expected
@@ -118,8 +115,8 @@ func TestArgMax(t *testing.T) {
 }
 
 func TestArgMin(t *testing.T) {
-	arr := Array([]float64{17, 10, 22,  3,  2,  7, 15,  9, 23,  4, 14, 18,  5,  8,  0, 12,  1,
-			       19, 20, 11,  6, 16, 21, 13}, 2,3,4)
+	arr := Array([]float64{17, 10, 22, 3, 2, 7, 15, 9, 23, 4, 14, 18, 5, 8, 0, 12, 1,
+		19, 20, 11, 6, 16, 21, 13}, 2, 3, 4)
 
 	if arr.ArgMin(0).NotEqual(Array([]float64{1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1}, 3, 4)).AnyTrue() {
 		t.Error(`Expected
