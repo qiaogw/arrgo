@@ -1,8 +1,8 @@
 package arrgo
 
 import (
+	"github.com/qiaogw/arrgo/internal"
 	"math"
-	"arrgo/internal"
 	//"github.com/ledao/arrgo/internal"
 )
 
